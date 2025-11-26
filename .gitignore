@@ -1,5 +1,12 @@
 information.txt
 local_s3/
+notebooks/data.csv
+notebooks/IMDB.csv
+
+data/
+logs/
+models/
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[codz]

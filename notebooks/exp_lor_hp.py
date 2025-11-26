@@ -12,6 +12,7 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score
 from nltk.corpus import stopwords
 from nltk.stem import WordNetLemmatizer
+from dotenv import load_dotenv
 
 import warnings
 warnings.simplefilter("ignore", UserWarning)
@@ -21,9 +22,14 @@ warnings.filterwarnings("ignore")
 # os.environ["MLFLOW_DISABLE_ARTIFACTS_DOWNLOAD"] = "1"
 
 # Set MLflow Tracking URI & DAGsHub integration
-MLFLOW_TRACKING_URI = "https://dagshub.com/MohanBisunke/MLOps_text_classification_project.mlflow"
-dagshub.init(repo_owner='MohanBisunke', repo_name='MLOps_text_classification_project', mlflow=True)
-mlflow.set_tracking_uri(MLFLOW_TRACKING_URI)
+
+load_dotenv()
+mlflow_tracking_uri = os.getenv("mlflow_tracking_uri")
+dagshub_repo_owner = os.getenv("dagshub_repo_owner")
+dagshub_repo_name = os.getenv("dagshub_repo_name")
+
+dagshub.init(repo_owner=dagshub_repo_owner, repo_name=dagshub_repo_name, mlflow=True)
+mlflow.set_tracking_uri(mlflow_tracking_uri)
 mlflow.set_experiment("LoR Hyperparameter Tuning")
 
 

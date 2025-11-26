@@ -4,6 +4,7 @@ import re
 import string
 import pandas as pd
 pd.set_option('future.no_silent_downcasting', True)
+from dotenv import load_dotenv
 
 import numpy as np
 import mlflow
@@ -24,19 +25,24 @@ import warnings
 warnings.simplefilter("ignore", UserWarning)
 warnings.filterwarnings("ignore")
 
+
+
+
 # ========================== CONFIGURATION ==========================
 CONFIG = {
     "data_path": "notebooks/data.csv",
     "test_size": 0.2,
-    "mlflow_tracking_uri": "https://dagshub.com/MohanBisunke/MLOps_text_classification_project.mlflow",
-    "dagshub_repo_owner": "MohanBisunke",
-    "dagshub_repo_name": "MLOps_text_classification_project",
     "experiment_name": "Bow vs TfIdf"
 }
 
+load_dotenv()
+mlflow_tracking_uri = os.getenv("mlflow_tracking_uri")
+dagshub_repo_owner = os.getenv("dagshub_repo_owner")
+dagshub_repo_name = os.getenv("dagshub_repo_name")
+
 # ========================== SETUP MLflow & DAGSHUB ==========================
-mlflow.set_tracking_uri(CONFIG["mlflow_tracking_uri"])
-dagshub.init(repo_owner=CONFIG["dagshub_repo_owner"], repo_name=CONFIG["dagshub_repo_name"], mlflow=True)
+mlflow.set_tracking_uri(mlflow_tracking_uri)
+dagshub.init(repo_owner=dagshub_repo_owner, repo_name=dagshub_repo_name, mlflow=True)
 mlflow.set_experiment(CONFIG["experiment_name"])
 
 # ========================== TEXT PREPROCESSING ==========================
