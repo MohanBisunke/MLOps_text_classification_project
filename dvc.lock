@@ -1,9 +1,9 @@
 schema: '2.0'
 stages:
   data_ingestion:
-    cmd: python -m src.data.data_ingestion
+    cmd: python -m src.datas.data_ingestion
     deps:
-    - path: src/data/data_ingestion.py
+    - path: src/datas/data_ingestion.py
       hash: md5
       md5: 84293b43c4294a62b78610c3394dfa6a
       size: 2142
@@ -17,14 +17,14 @@ stages:
       size: 649243
       nfiles: 2
   data_preprocessing:
-    cmd: python -m src.data.data_preprocessing
+    cmd: python -m src.datas.data_preprocessing
     deps:
     - path: data/raw
       hash: md5
       md5: 4cb13be77d38db01f1457549ce0e0406.dir
       size: 649243
       nfiles: 2
-    - path: src/data/data_preprocessing.py
+    - path: src/datas/data_preprocessing.py
       hash: md5
       md5: cfd2c732b388ef0e81532979126dedf4
       size: 3016

@@ -10,14 +10,27 @@ warnings.simplefilter("ignore", UserWarning)
 warnings.filterwarnings("ignore")
 
 
-from dotenv import load_dotenv
-load_dotenv()
-mlflow_tracking_uri = os.getenv("mlflow_tracking_uri")
-dagshub_repo_owner = os.getenv("dagshub_repo_owner")
-dagshub_repo_name = os.getenv("dagshub_repo_name")
+# from dotenv import load_dotenv
+# load_dotenv()
+# mlflow_tracking_uri = os.getenv("mlflow_tracking_uri")
+# dagshub_repo_owner = os.getenv("dagshub_repo_owner")
+# dagshub_repo_name = os.getenv("dagshub_repo_name")
+# dagshub.init(repo_owner=dagshub_repo_owner, repo_name=dagshub_repo_name, mlflow=True)
+# mlflow.set_tracking_uri(mlflow_tracking_uri)
 
-dagshub.init(repo_owner=dagshub_repo_owner, repo_name=dagshub_repo_name, mlflow=True)
-mlflow.set_tracking_uri(mlflow_tracking_uri)
+# Set up DagsHub credentials for MLflow tracking
+dagshub_token = os.getenv("DAGSHUB_TOKEN")
+if not dagshub_token:
+    raise EnvironmentError("DAGSHUB environment variable is not set")
+
+os.environ["MLFLOW_TRACKING_USERNAME"] = dagshub_token
+os.environ["MLFLOW_TRACKING_PASSWORD"] = dagshub_token
+
+dagshub_url = "https://dagshub.com"
+repo_owner = "MohanBisunke"
+repo_name = "MLOps_text_classification_project"
+# Set up MLflow tracking URI
+mlflow.set_tracking_uri(f'{dagshub_url}/{repo_owner}/{repo_name}.mlflow')
 
 
 def load_model_info(file_path: str) -> dict:

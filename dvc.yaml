@@ -2,19 +2,19 @@
 
 stages:
   data_ingestion:
-    cmd: python -m src.data.data_ingestion
+    cmd: python -m src.datas.data_ingestion
     deps:
-    - src/data/data_ingestion.py
+    - src/datas/data_ingestion.py
     params:
     - data_ingestion.test_size
     outs:
     - data/raw
 
   data_preprocessing:
-    cmd: python -m src.data.data_preprocessing
+    cmd: python -m src.datas.data_preprocessing
     deps:
     - data/raw
-    - src/data/data_preprocessing.py
+    - src/datas/data_preprocessing.py
     outs:
     - data/interim
 
