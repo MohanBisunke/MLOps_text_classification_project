@@ -42,7 +42,7 @@ jobs:
       - name: Promote model to production
         if: success()
         env:
-          CAPSTONE_TEST: ${{ ssecrets.DAGSHUB_TOKEN }}
+          CAPSTONE_TEST: ${{ secrets.DAGSHUB_TOKEN }}
         run: python scripts/promote_model.py
 
       - name: Run Flask app tests
