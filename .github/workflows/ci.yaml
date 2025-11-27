@@ -43,7 +43,7 @@ jobs:
         if: success()
         env:
           CAPSTONE_TEST: ${{ secrets.DAGSHUB_TOKEN }}
-        run: python scripts/promote_model.py
+        run: python -m scripts.promote_model
 
       - name: Run Flask app tests
         if: success()
