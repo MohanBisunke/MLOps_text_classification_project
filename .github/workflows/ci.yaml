@@ -35,18 +35,18 @@ jobs:
 
       - name: Run model tests
         env:
-          CAPSTONE_TEST: ${{ secrets.DAGSHUB_TOKEN }}
+          DAGSHUB_TOKEN: ${{ secrets.DAGSHUB_TOKEN }}
         run: |
           python -m unittest test.test_model
 
       - name: Promote model to production
         if: success()
         env:
-          CAPSTONE_TEST: ${{ secrets.DAGSHUB_TOKEN }}
+          DAGSHUB_TOKEN: ${{ secrets.DAGSHUB_TOKEN }}
         run: python -m scripts.promote_model
 
       - name: Run Flask app tests
         if: success()
         env:
-          CAPSTONE_TEST: ${{ secrets.DAGSHUB_TOKEN }}
+          DAGSHUB_TOKEN: ${{ secrets.DAGSHUB_TOKEN }}
         run: python -m unittest test/test_flask_app.py
