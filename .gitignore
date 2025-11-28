@@ -5,7 +5,7 @@ notebooks/IMDB.csv
 
 data/
 logs/
-models/
+models/model.pkl
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
