@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mlops-text-mohan
+  labels:
+    app: mlops-text-mohan
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: mlops-text-mohan
+  template:
+    metadata:
+      labels:
+        app: mlops-text-mohan
+    spec:
+      containers:
+      - name: mlops-text-mohan
+        image: 135820798074.dkr.ecr.us-east-1.amazonaws.com/mlops-text-mohan:latest
+        ports:
+        - containerPort: 5000
+        resources:
+          requests:
+            memory: "256Mi"
+            cpu: "250m"
+          limits:
+            memory: "512Mi"
+            cpu: "1"
+        env:
+        - name: DAGSHUB_TOKEN
+          valueFrom:
+            secretKeyRef:
+              name: dagshub_secret
+              key: DAGSHUB_TOKEN
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mlops-text-mohan-service
+spec:
+  type: LoadBalancer
+  selector:
+    app: mlops-text-mohan
+  ports:
+    - name: http
+      protocol: TCP
+      port: 5000
+      targetPort: 5000
