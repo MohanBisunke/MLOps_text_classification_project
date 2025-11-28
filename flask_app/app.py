@@ -10,6 +10,7 @@ import string
 import re
 import dagshub
 from prometheus_client import CollectorRegistry, Counter, Histogram,generate_latest, CONTENT_TYPE_LATEST
+import numpy as np
 
 
 import warnings
