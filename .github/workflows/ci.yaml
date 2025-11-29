@@ -82,7 +82,7 @@ jobs:
 
       - name: Update kubeconfig
         run: |
-          aws eks update-kubeconfig --region us-east-1 --name mlops-app
+          aws eks update-kubeconfig --region us-east-1 --name mlops-text-mohan
 
       - name: Create Kubernetes Secret
         run: |
